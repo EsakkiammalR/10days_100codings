@@ -1,0 +1,221 @@
+ Basic Math Solution
+
+- [1] GCD of a Number
+
+java
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+
+- [2] LCM of a Number
+
+java
+     public static int lcm(int a, int b) {
+        int max = Math.max(a, b);
+        int min = Math.min(a, b);
+        int lcm = max;
+
+        while (lcm % min != 0) 
+            lcm += max;
+
+        return lcm;
+    }
+
+
+- [3] Armstrong Number
+
+java
+public class ArmstrongNumberCheck {
+    public static boolean isArmstrong(int num) {
+        int original = num, sum = 0;
+        int n = String.valueOf(num).length();
+        
+        while (num != 0) {
+            int digit = num % 10;
+            sum += Math.pow(digit, n);
+            num /= 10;
+        }
+        
+        return original == sum;
+    }
+
+    public static void main(String[] args) {
+        int num = 153;
+        System.out.println(num + " is Armstrong: " + isArmstrong(num));
+    }
+}
+
+
+
+- [4] Perfect Number
+
+java
+public class PerfectNumberExample {
+    public static boolean isPerfectNumber(int num) {
+        int sum = 0;
+        for (int i = 1; i <= num / 2; i++) {
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+        return sum == num;
+    }
+
+    public static void main(String[] args) {
+        int num = 28;
+        System.out.println(num + " is a perfect number: " + isPerfectNumber(num));
+    }
+}
+
+
+
+- [5] Strong Number
+
+java
+public class StrongNumberExample {
+    public static int factorial(int n) {
+        int fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
+    public static boolean isStrongNumber(int num) {
+        int sum = 0;
+        int originalNum = num;
+
+        while (num > 0) {
+            int digit = num % 10;
+            sum += factorial(digit);
+            num /= 10;
+        }
+
+        return sum == originalNum;
+    }
+
+    public static void main(String[] args) {
+        int num = 145;
+        System.out.println(num + " is a strong number: " + isStrongNumber(num));
+    }
+}
+
+
+
+- [6] Automorphic Number
+
+java
+
+static int isAutomorphic(int n){
+    int square = n * n;
+    while(n != 0)
+    {
+        // means not automorphic number
+        if(n % 10 != square % 10){
+            return 0;
+        }
+        // reduce down numbers
+        n /= 10;
+        square /= 10;
+    }
+
+
+- [7] Nth Prime Number
+
+java
+public class NthPrimeExample {
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static int findNthPrime(int n) {
+        int count = 0, num = 1;
+        while (count < n) {
+            num++;
+            if (isPrime(num)) {
+                count++;
+            }
+        }
+        return num;
+    }
+
+    public static void main(String[] args) {
+        int n = 10;
+        System.out.println("The " + n + "-th prime number is: " + findNthPrime(n));
+    }
+}
+
+
+
+- [8] Reverse a Number
+
+java
+public class ReverseNumberExample {
+    public static int reverseNumber(int num) {
+        int reverse = 0;
+        while (num != 0) {
+            int digit = num % 10;
+            reverse = reverse * 10 + digit;
+            num /= 10;
+        }
+        return reverse;
+    }
+
+    public static void main(String[] args) {
+        int num = 12345;
+        System.out.println("Reverse of " + num + " is: " + reverseNumber(num));
+    }
+}
+
+
+
+- [9] Palindromic Number
+
+java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0) return false;
+        if(x<10) return true;
+        int rev=0;
+        int copy=x;
+        while(x>0)
+        {
+            rev=rev*10+(x%10);
+            x/=10;
+        }
+        if(copy==rev) return true;
+        return false;
+    }
+}
+
+
+- [10] Number of Divisors
+
+java
+public class NumberOfDivisorsExample {
+    public static int numberOfDivisors(int num) {
+        int count = 0;
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int num = 28;
+        System.out.println("Number of divisors of " + num + " is: " + numberOfDivisors(num));
+    }
+}
+
