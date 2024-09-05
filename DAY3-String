@@ -1,0 +1,79 @@
+-1.RotatedPalindrome
+
+class Solution {
+
+    // Method to check if any rotation of the string is a palindrome
+    int isRotatedPalindrome(String s) {
+        int len = s.length();
+        char[] ch = s.toCharArray();
+
+        // Iterate through all rotations of the string
+        for (int i = 0; i < len; i++) {
+            // Perform left rotation by 1 position
+            char temp = ch[0];
+            for (int j = 1; j < len; j++) {
+                ch[j - 1] = ch[j];
+            }
+            ch[len - 1] = temp;
+            String t1 = new String(ch);
+            
+            // Check if the new string is a palindrome
+            boolean flag = true;
+            for (int j = 0; j < len / 2; j++) {
+                if (t1.charAt(j) != t1.charAt(len - j - 1)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) return 1; // Found a palindrome
+        }
+        return 0; // No palindrome found in any rotation
+    }
+
+    // Main method to test the functionality
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Test case
+        String s = "abcba";
+        int result = solution.isRotatedPalindrome(s);
+        
+        // Output the result
+        System.out.println("Is any rotation of the string a palindrome? " + (result == 1 ? "Yes" : "No"));
+    }
+}
+
+
+-2.Count of  pairs
+
+public class Solution {
+
+    private static final int MAX = 256;
+    static int countPairs(String s) {
+        int cnt[] = new int[MAX];
+        for (int i = 0; i < s.length(); i++) {
+            cnt[s.charAt(i)]++;
+        }
+
+        int ans = 0;
+        for (int i = 0; i < MAX; i++) {
+            ans += cnt[i] * cnt[i];
+        }
+
+        return ans;
+    }
+
+    // Main method to test the countPairs function
+    public static void main(String[] args) {
+        // Test cases
+        String s1 = "aabb";
+        String s2 = "abc";
+        String s3 = "aabbcc";
+
+        // Testing countPairs function
+        System.out.println("Number of pairs in '" + s1 + "': " + countPairs(s1));
+        System.out.println("Number of pairs in '" + s2 + "': " + countPairs(s2));
+        System.out.println("Number of pairs in '" + s3 + "': " + countPairs(s3));
+    }
+}
+
