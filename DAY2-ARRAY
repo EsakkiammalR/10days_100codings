@@ -244,3 +244,85 @@ class MissingNumber {
         System.out.println("The missing number is: " + result);
     }
 }
+
+-9.Find the peakelement in the array
+
+class PeakElement {
+    // Method to find the peak element
+    public static int findPeakElement(int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0; // Indicate that no peak exists
+        }
+        int start = 0;
+        int end = n - 1;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (nums[mid] > nums[mid + 1]) {
+                end = mid; // Look in the left half
+            } else {
+                start = mid + 1; // Look in the right half
+            }
+        }
+        return start; // Peak element index
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 2, 5, 6, 8, 5, 4, 3, 2};
+        int result = findPeakElement(nums);
+        System.out.println("The peak element of the array is:" + nums[result]);
+    }
+}
+
+10.K divisible element in the array
+
+import java.util.HashMap;
+
+public class KDivisibleSubarrays {
+    
+    // Function to count the number of subarrays with sum divisible by k
+    public static int countKDivisibleSubarrays(int[] nums, int k) {
+        if (k == 0) {
+            throw new IllegalArgumentException("k cannot be zero");
+        }
+        
+        HashMap<Integer, Integer> remainderCount = new HashMap<>();
+        remainderCount.put(0, 1); // Handle the case where a prefix sum itself is divisible by k
+        
+        int prefixSum = 0;
+        int count = 0;
+        
+        for (int num : nums) {
+            prefixSum += num;
+            int remainder = prefixSum % k;
+            
+            // Adjust remainder to be positive
+            if (remainder < 0) {
+                remainder += k;
+            }
+            
+            // Check if this remainder has been seen before
+            if (remainderCount.containsKey(remainder)) {
+                count += remainderCount.get(remainder);
+            }
+            
+            // Update the count of this remainder in the hashmap
+            remainderCount.put(remainder, remainderCount.getOrDefault(remainder, 0) + 1);
+        }
+        
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {4, 5, 0, -2, -3, 1};
+        int k = 5;
+        int result = countKDivisibleSubarrays(nums, k);
+        System.out.println("The number of subarrays with sum divisible by " + k + " is " + result);
+    }
+}
+
+
+
+        
+    
+
